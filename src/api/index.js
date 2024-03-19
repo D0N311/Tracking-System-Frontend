@@ -4,3 +4,7 @@ export * from './LogoutApi.jsx'
 export * from './CheckUser.jsx'
 export * from './AddCompanyApi.jsx'
 export * from './CompanyIndexApi.jsx';
+export * from './SearchInput.jsx';
+export * from './DeactivateAdminAPI.jsx';
+export * from './AdminIndex.jsx';
+export * from './ActivateAdminAPI.jsx';

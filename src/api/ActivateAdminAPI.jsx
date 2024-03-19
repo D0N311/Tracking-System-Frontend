@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const ActivateAdmin = async (company_name, description, location, admin_id) => {
+export const ActivateAdminAPI = async (admin) => {
     const token = localStorage.getItem('token');
-  const response = await axios.post('http://localhost:8000/api/superadmin/activateAdmin', 
-    { company_name, description, location, admin_id },
+    const role = 'admin';
+  const response = await axios.post('http://localhost:8000/api/superadmin/activateAdmin',{ admin, role },
     {
       headers: {
         'Authorization': `Bearer ${token}`

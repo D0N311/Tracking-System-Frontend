@@ -2,7 +2,7 @@ import { UserContext } from '../services/UserContext';
 import { useContext } from 'react';
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import {SADashboard} from '../pages';
-import {Company, SuperAdminSidebar, CompanyProfile} from '../pages/SuperAdmin';
+import {Company, SuperAdminSidebar, CompanyProfile, Admin} from '../pages/SuperAdmin';
 
 export const PrivateRoutes = () => {
     const token = localStorage.getItem('token');
@@ -27,6 +27,11 @@ export const PrivateRoutes = () => {
                     name: "CompanyProfile",
                     path: "Profile",
                     element: <CompanyProfile />
+                },
+                {
+                    name: "Admin",
+                    path: "admin",
+                    element: <Admin />
                 }
             ]
         },

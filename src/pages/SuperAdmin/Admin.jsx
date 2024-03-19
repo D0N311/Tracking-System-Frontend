@@ -7,7 +7,7 @@ export const Admin  = () => {
 
     return(
         <div >
-            {/* Admin Table */}
+            {/* Admin Table */} 
             <div>
             <ActivateAdmin />
             <AdminTable />

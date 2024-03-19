@@ -104,59 +104,59 @@ export const Register = () => {
               </header>   
             <form className="gap-4 md:grid md:grid-cols-2" onSubmit={formik.handleSubmit}>
                 <div>
-                    <label for="name" class="block mb-2 text-sm font-medium text-white dark:text-black">Full Name</label>
+                    <label for="name" className="block mb-2 text-sm font-medium text-white dark:text-black">Full Name</label>
                     <input type="text" id="name" name='name' 
                     
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.name}
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name" required />
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name" required />
                     {formik.touched.name && formik.errors.name ? (
                       <div className='text-red-600'>{formik.errors.name}</div>
                     ) : null}
                 </div>
                 <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-white dark:text-black">Email</label>
+                    <label for="email" className="block mb-2 text-sm font-medium text-white dark:text-black">Email</label>
                     <input type="text" id="email" name='email' 
                     
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.email}
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required />
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required />
                       {formik.touched.email && formik.errors.email ? (
                           <div className='text-red-600'>{formik.errors.email}</div>
                         ) : null}
                 </div>
                 <div>
-                    <label for="password" class="block mb-2 text-sm font-medium text-white dark:text-black">Password</label>
+                    <label for="password" className="block mb-2 text-sm font-medium text-white dark:text-black">Password</label>
                     <input type={showPassword ? "text" : "password"} name='password' 
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.password}
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Password" required />
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Password" required />
                     {formik.touched.password && formik.errors.password ? (
                         <div className='text-red-600'>{formik.errors.password}</div>
                       ) : null}
                 </div>
                 <div>
-                    <label for="c_password" class="block mb-2 text-sm font-medium text-white dark:text-black">Confirm Password</label>
+                    <label for="c_password" className="block mb-2 text-sm font-medium text-white dark:text-black">Confirm Password</label>
                     <input type={showPassword ? "text" : "password"} id="c_password" name='c_password' 
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.c_password }
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Confirm Password" required />
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Confirm Password" required />
                     {formik.touched.c_password && formik.errors.c_password ? (
                       <div className='text-red-600'>{formik.errors.c_password}</div>
                     ) : null}
                 </div>
-                <div class="flex items-center justify-between ">
-                    <div class="flex items-start">
-                    <div class="flex items-center h-5">
+                <div className="flex items-center justify-between ">
+                    <div className="flex items-start">
+                    <div className="flex items-center h-5">
                       <input id="remember" aria-describedby="remember" type="checkbox" onChange={togglePassword}
-                      class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
+                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
                     </div>
-                    <div class="ml-1 text-sm">
-                      <label for="remember" class="text-white cursor-pointer dark:text-gray-300">Show Password</label>
+                    <div className="ml-1 text-sm">
+                      <label for="remember" className="text-white cursor-pointer dark:text-gray-300">Show Password</label>
                     </div>
                   </div>
                 </div>

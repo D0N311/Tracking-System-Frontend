@@ -37,7 +37,7 @@ export const CompanyTable = () => {
     return(
         
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
 <div className="flex items-center justify-between mb-3">
     <h1 className="py-2 text-2xl font-bold text-gray-800 dark:text-gray-50">Companies</h1>
     <button onClick={fetchCompanies} className="px-4 py-2 font-bold text-white bg-blue-500 border-blue-700 rounded-3xl hover:bg-blue-700">
@@ -46,7 +46,7 @@ export const CompanyTable = () => {
     </svg>
 </button>
 </div>
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     <tr>
         <th scope="col" className="sticky top-0 px-6 py-3 bg-white">
@@ -68,21 +68,21 @@ export const CompanyTable = () => {
 </thead>
         <tbody>
             {companies.map((company) => (
-            <tr key={company.id} class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <tr key={company.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {company.company_name}
                 </th>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                 {company.admin_name ? company.admin_name : 'No Admin'}
                 </td>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                 {company.location ? company.location : 'No Location'}
                 </td>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                 {company.user_count ? company.user_count : 'No User'}
                 </td>
-                <td class="px-6 py-4">
-                <button onClick={() => openModal(company)} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</button>
+                <td className="px-6 py-4">
+                <button onClick={() => openModal(company)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</button>
                 </td>
             </tr>
             ))}

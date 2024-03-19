@@ -1,6 +1,7 @@
-import { SearchInput } from '../api';
+import { SearchInput, ActivateAdminAPI } from '../api';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const ActivateAdmin = () => {
 
@@ -11,10 +12,31 @@ export const ActivateAdmin = () => {
     const fetchSearchResults = async () => {
         if (search) { // Only fetch if search is not empty
             const response = await SearchInput(search);
-            console.log(response.data.data.name);
-            setSearchResults(response.data);
+            setSearchResults(response.data); // Update searchResults
             setIsOpen(true); // Open the modal after fetching the results
         }
+    }
+
+    const handleActivate = async () => {
+        const admin = searchResults.data.email;
+        try {
+            const response = await ActivateAdminAPI(admin);
+            closeModal();
+            toast.success(response.data.message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+           
+        } catch (error) {
+            console.error('Failed to activate admin:', error);
+        }
+        setIsOpen(false);
     }
 
     const handleSearch = (e) => {
@@ -41,7 +63,7 @@ export const ActivateAdmin = () => {
                     onChange={e => setSearch(e.target.value)}
                     id="default-search" 
                     className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                    placeholder="Admin's email or ID to activate" 
+                    placeholder="Admin's Email to activate" 
                     required 
                 />
                 <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
@@ -64,22 +86,23 @@ export const ActivateAdmin = () => {
                             <svg className="w-12 h-12 mx-auto mb-4 text-gray-400 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                             </svg>
-                            
                             <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                Are you sure you want to activate {searchResults && searchResults.data ? searchResults.data.name : 'this user'} ?
-                                The admin will no longer be able to access the system. Company data will not be deleted.
+                                Are you sure you want to activate {searchResults && searchResults.data ? searchResults.data.name : 'this user'}.
+                                <br />
+                                 The admin will be able to access the system and perform administrative tasks.
                             </h3>
                             
-                            <button  type="button" className="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                            <button onClick={handleActivate}  type="button" className="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                 Yes, I'm sure
                             </button>
-                            <button onClick={closeModal}  type="button" className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                            <button onClick={closeModal}  type="button" className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                No, Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
     </Modal>
-
+    <ToastContainer />
         </>
     )
 }

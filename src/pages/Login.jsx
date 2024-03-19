@@ -97,38 +97,38 @@ export const Login = () =>  {
 
               {/* <form onSubmit={handleSubmit}> */}
               <form onSubmit={formik.handleSubmit}>
-                <div class="relative mb-6">
-                  <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                    <img class="w-5 h-5 text-gray-500 dark:bg-white dark:rounded-md" aria-hidden="true" src={Email} />
+                <div className="relative mb-6">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <img className="w-5 h-5 text-gray-500 dark:bg-white dark:rounded-md" aria-hidden="true" src={Email} />
                   </div>
                   <input type="email" 
                   name='email' required
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" />
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" />
                 </div>
             
-                <div class="relative mb-1">
-                  <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                    <img class="w-5 h-5 text-gray-900 dark:bg-white dark:rounded-md " aria-hidden="true" src={Eye} />
+                <div className="relative mb-1">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <img className="w-5 h-5 text-gray-900 dark:bg-white dark:rounded-md " aria-hidden="true" src={Eye} />
                   </div>
                   <input type={showPassword ? "text" : "password"}
                   name='password' required
                    onChange={formik.handleChange}
                    onBlur={formik.handleBlur}
                    value={formik.values.password}
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Password" />
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Password" />
                 
                 </div>
-                <div class="flex items-center justify-between  mb-6">
-                    <div class="flex items-start">
-                    <div class="flex items-center h-5">
+                <div className="flex items-center justify-between  mb-6">
+                    <div className="flex items-start">
+                    <div className="flex items-center h-5">
                       <input id="remember" aria-describedby="remember" type="checkbox" onChange={togglePassword}
-                      class="w-4 h-4 border cursor-pointer border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
+                      className="w-4 h-4 border cursor-pointer border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
                     </div>
-                    <div class="ml-1 text-sm">
-                      <label for="remember" class="text-white cursor-pointer dark:text-gray-300">Show Password</label>
+                    <div className="ml-1 text-sm">
+                      <label for="remember" className="text-white cursor-pointer dark:text-gray-300">Show Password</label>
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,7 +9,15 @@ import WelcomeBanner from '../partials/dashboard/WelcomeBanner';
 
 export const SADashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showBanner, setShowBanner] = useState(true);
 
+  useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowBanner(false);
+        }, 5000);
+
+        return () => clearTimeout(timer); // This will clear the timer when the component unmounts
+    }, []);
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
@@ -23,7 +31,7 @@ export const SADashboard = () => {
         <main>
           <div className="w-full px-4 py-8 mx-auto sm:px-6 lg:px-8 max-w-9xl">
             {/* Welcome banner */}
-            <WelcomeBanner />
+            {showBanner && <WelcomeBanner />}
 
             {/* Dashboard actions */}
             <div className="mb-8 sm:flex sm:justify-between sm:items-center">

@@ -60,9 +60,9 @@ export const CompanyForm = () =>{
 
     return(
 
-               <div className="lg:ms-auto mx-auto ">
+               <div className="mx-auto lg:ms-auto ">
                <div className='flex justify-start w-screen'>
-                  <button onClick={openModal} className="w-auto p-10 py-3 text-base font-medium text-white transition duration-300 bg-blue-500 rounded hover:bg-blue-700">Add Company</button>
+                  <button onClick={openModal} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Add Company</button>
               </div>
               <Modal
                 isOpen={modalIsOpen}
@@ -71,13 +71,13 @@ export const CompanyForm = () =>{
                 className="fixed bottom-0 left-0 flex items-center justify-center w-full h-full bg-gray-800 bg-opacity-50"
           
               >
-                   <div className="py-16 px-7 rounded-md bg-white">                                                      
+                   <div className="py-16 bg-white rounded-md px-7">                                                      
                     <form onSubmit={formik.handleSubmit}>
                     
-                <div className="grid md:grid-cols-2 grid-cols-1 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <div className="md:col-span-2">
                         <div className="flex items-center justify-between w-full">
-    <label for="subject" className="font-bold text-black text-lg">Add Company</label>
+    <label for="subject" className="text-lg font-bold text-black">Add Company</label>
     <svg onClick={closeModal} className="w-6 h-6 text-gray-700 cursor-pointer fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
         <path d="M18 1.3L16.7 0 9 7.7 1.3 0 0 1.3 7.7 9 0 16.7 1.3 18 9 10.3l7.7 7.7 1.3-1.3L10.3 9z"/>
     </svg>
@@ -91,7 +91,7 @@ export const CompanyForm = () =>{
                                         onBlur={formik.handleBlur}
                                         value={formik.values.email}
                                         placeholder="Company Name" 
-                                        className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700 "/>
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-700 "/>
                                      
                                       </div>
                                       <div className="md:col-span-2">
@@ -102,7 +102,7 @@ export const CompanyForm = () =>{
                                         onBlur={formik.handleBlur}
                                         value={formik.values.email}
                                         placeholder="Description" 
-                                        className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700 "/>
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-700 "/>
                                      
                                       </div>
                                         <div className="md:col-span-2">
@@ -113,23 +113,23 @@ export const CompanyForm = () =>{
                                        onBlur={formik.handleBlur}
                                        value={formik.values.email}
                                        placeholder="Address" 
-                                       className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700"/>
+                                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-700"/>
                                      
                                        </div>
                                        <div className="md:col-span-2">
                                        <input type="text" id="admin_id" name="admin_id" placeholder="Admin" 
                                        onChange={formik.handleChange}
                                        onBlur={formik.handleBlur}
-                                       value={formik.values.email}className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-700 "/>
+                                       value={formik.values.email}className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-700 "/>
                                      </div>
                                       {/* <div className="md:col-span-2">
-                                        <label for="subject" className="float-left block  font-normal text-gray-400 text-lg">Company Logo</label>
+                                        <label for="subject" className="block float-left text-lg font-normal text-gray-400">Company Logo</label>
                                         <input type="file" id="file" name="file" placeholder="Charger votre fichier" className="peer block w-full appearance-none border-none   bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"/>
                                     </div> */}
                                     
                                       <div className="md:col-span-2">
                                         <button type='submit'
-                                        className="py-3 text-base font-medium rounded text-white bg-blue-500 w-full hover:bg-blue-700 transition duration-300">Add Company</button>
+                                        className="w-full py-3 text-base font-medium text-white transition duration-300 bg-blue-500 rounded hover:bg-blue-700">Add Company</button>
                                       </div>
                                     </div>
                                   </form>

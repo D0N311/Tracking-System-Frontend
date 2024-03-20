@@ -4,6 +4,7 @@ const initialState = {
 name: '',
 verified: '',
 role: '',
+company_id: '',
 
 };
 

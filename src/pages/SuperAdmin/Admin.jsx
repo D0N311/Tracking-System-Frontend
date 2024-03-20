@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {  } from '../../forms';
-import { AdminTable } from '../../tables';
+import { AdminTable, AddAdminTable } from '../../tables';
 import { ActivateAdmin } from '../../forms';
 
 export const Admin  = () => {
@@ -9,6 +9,7 @@ export const Admin  = () => {
         <div >
             {/* Admin Table */} 
             <div>
+            <AddAdminTable />
             <ActivateAdmin />
             <AdminTable />
             </div>

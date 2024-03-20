@@ -23,10 +23,11 @@ function DropdownProfile({
     const fetchUser = async () => {
       try {
         const user = await checkUser();
-        context.setState({ name: user.data.name,
+        context.setState({name: user.data.name,
                           verified: user.data.verified,
-                          role: user.data.role});   
-                          
+                          role: user.data.role,
+                          company_id: user.data.company_id
+                        });   
       } catch (error) {
         localStorage.clear();
         navigate('/Login');
@@ -102,7 +103,8 @@ function DropdownProfile({
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200 dark:border-slate-700">
             <div className="font-medium text-slate-800 dark:text-slate-100">{context.state.name}</div>
-            <div className="text-xs italic text-slate-500 dark:text-slate-400">{context.state.role}</div>
+            <div className="text-xs italic text-slate-500 dark:text-slate-400">Company ID: {context.state.company_id}</div>
+            <div className="text-xs italic text-slate-500 dark:text-slate-400">Role: {context.state.role}</div>
           </div>
           <ul>
             <li>

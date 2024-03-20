@@ -8,11 +8,15 @@ export const CompanyTable = () => {
     const [selectedCompany, setSelectedCompany] = useState(null);
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
-    const fetchCompanies = async () => {
-        const response = await CompanyIndex();
+    const fetchCompanies = async (page = 1) => {
+        const response = await CompanyIndex(page);
         if (Array.isArray(response.data.data.data)) {
             setCompanies(response.data.data.data);
+            setCurrentPage(response.data.data.current_page);
+            setTotalPages(response.data.data.last_page);
         } else {
             console.error('CompanyIndex did not return an array');
         }
@@ -34,6 +38,13 @@ export const CompanyTable = () => {
       const toggleEdit = () => {
         setIsEditing(!isEditing);
     };
+
+    const handlePageChange = (page) => {
+        if (page < 1 || page > totalPages) {
+            return;
+        }
+        fetchCompanies(page);
+    };    
     return(
         
 
@@ -46,7 +57,7 @@ export const CompanyTable = () => {
     </svg>
 </button>
 </div>
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     <tr>
         <th scope="col" className="sticky top-0 px-6 py-3 bg-white">
@@ -68,7 +79,7 @@ export const CompanyTable = () => {
 </thead>
         <tbody>
             {companies.map((company) => (
-            <tr key={company.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            <tr key={company.id} className="border-b odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {company.company_name}
                 </th>
@@ -88,6 +99,22 @@ export const CompanyTable = () => {
             ))}
         </tbody>
     </table>
+    {/* pagination */}
+<nav aria-label="" className='flex justify-center mt-3'>
+  <ul className="inline-flex -space-x-px text-sm">
+    <li>
+      <a onClick={() => handlePageChange(currentPage - 1)} className="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 cursor-pointer ms-0 border-e-0 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+    </li>
+    {[...Array(totalPages).keys()].map(page => (
+          <li key={page}>
+            <button onClick={() => handlePageChange(page + 1)} className={`flex cursor-pointer items-center justify-center px-3 h-8 leading-tight ${currentPage === page + 1 ? 'text-blue-600 border border-gray-300 bg-blue-50' : 'text-gray-500 bg-white border border-gray-300'} hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}>{page + 1}</button>
+          </li>
+        ))}
+    <li>
+      <a onClick={() => handlePageChange(currentPage + 1)} className="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 cursor-pointer rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+    </li>
+  </ul>
+</nav>
     <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

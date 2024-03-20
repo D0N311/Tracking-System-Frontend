@@ -7,7 +7,7 @@ import './css/style.css';
 import './charts/ChartjsConfig';
 
 // Import pages
-import {Dashboard, Login, Register, SADashboard } from './pages';
+import {Dashboard, Login, Register, SADashboard, ADashboard } from './pages';
 
 import {Company, CompanyProfile} from '../src/pages/SuperAdmin';
 
@@ -24,10 +24,11 @@ function App() {
             </Route>
            
             <Route element={<PrivateRoutes />}>
-                <Route element={<Dashboard/>} path="/Dashboard"/>
-                <Route element={<SADashboard/>} path="/Dashboard/SuperAdmin/*"/>
-                <Route element={<Company/>} path="/Company"/>
-                <Route element={<CompanyProfile/>} path="/Profile"/>
+                <Route element={<Dashboard/>} path="/dashboard"/>
+                <Route element={<SADashboard/>} path="/dashboard/superadmin/*"/>
+                <Route element={<ADashboard/>} path="/dashboard/admin/*"/>
+                <Route element={<Company/>} path="/company"/>
+                <Route element={<CompanyProfile/>} path="/crofile"/>
             </Route>
           </Routes>
           </UserProvider>

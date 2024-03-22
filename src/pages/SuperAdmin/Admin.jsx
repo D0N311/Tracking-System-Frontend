@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {  } from '../../forms';
-import { AdminTable, AddAdminTable } from '../../tables';
+import { AdminTable,  } from '../../tables';
 import { ActivateAdmin } from '../../forms';
 
 export const Admin  = () => {
@@ -8,8 +7,9 @@ export const Admin  = () => {
     return(
         <div >
             {/* Admin Table */} 
+            <h2 class="text-4xl -mt-10 font-extrabold dark:text-white">Admin Management</h2>
             <div>
-            <AddAdminTable />
+            
             <ActivateAdmin />
             <AdminTable />
             </div>

@@ -1,3 +1,5 @@
 export * from './CompanyTable.jsx'
 export * from './AdminTable.jsx'
 export * from './AddAdminTable.jsx'
+export * from './CurrentUsers.jsx'
+export * from './ActivateUsersTable.jsx'

@@ -45,11 +45,10 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
         aria-hidden="true"
       ></div>
 
-      {/* Sidebar */}
       <div
         id="sidebar"
         ref={sidebar}
-        className={`flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-slate-800 p-4 transition-all duration-200 ease-in-out ${
+        className={`flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 ${sidebarExpanded ? 'lg:w-64 2xl:w-64' : 'lg:w-20 2xl:w-20'} shrink-0 bg-slate-800 p-4 transition-all duration-200 ease-in-out ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-64'
         }`}
       >
@@ -355,7 +354,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
         </div>
 
         {/* Expand / collapse button */}
-        <div className="justify-end hidden pt-3 mt-auto lg:inline-flex 2xl:hidden">
+        <div className="justify-end pt-3 mt-auto">
           <div className="px-3 py-2">
             <button onClick={() => setSidebarExpanded(!sidebarExpanded)}>
               <span className="sr-only">Expand / collapse sidebar</span>
@@ -366,6 +365,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </button>
           </div>
         </div>
+
       </div>
     </div>
   );

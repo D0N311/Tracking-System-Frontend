@@ -1,6 +1,7 @@
-import { CompanyIndex } from '../api';
+import { CompanyIndex, setAdmin } from '../api';
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const CompanyTable = () => {
 
@@ -10,6 +11,7 @@ export const CompanyTable = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    const [adminEmail, setAdminEmail] = useState('');
 
     const fetchCompanies = async (page = 1) => {
         const response = await CompanyIndex(page);
@@ -37,6 +39,29 @@ export const CompanyTable = () => {
     
       const toggleEdit = () => {
         setIsEditing(!isEditing);
+    };
+
+    const handleSetAdmin = async (adminEmail) => {
+        try {
+            const email = adminEmail;
+            const company_id = selectedCompany.id;
+            const response =  await setAdmin(email, company_id);
+            toast.success(response.data.message, {
+                position: "top-center",
+                marginTop: "50px",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            fetchCompanies();
+            closeModal();
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const handlePageChange = (page) => {
@@ -84,7 +109,16 @@ export const CompanyTable = () => {
                 {company.company_name}
                 </th>
                 <td className="px-6 py-4">
-                {company.admin_name ? company.admin_name : 'No Admin'}
+                    <div className='flex'>
+                    {company.admin_name ? 
+                        <span style={{color: 'green'}}>●</span> : 
+                        <span style={{color: 'grey'}}>●</span>
+                    }
+                    <div className='ml-3'>
+                    {company.admin_name ? company.admin_name : 'No Admin'}
+                    </div>
+                    </div>
+                
                 </td>
                 <td className="px-6 py-4">
                 {company.location ? company.location : 'No Location'}
@@ -133,17 +167,22 @@ export const CompanyTable = () => {
         <hr className="w-full"/>
         {isEditing ? (
             <div className="flex items-center justify-center w-full ">
-            <form className='w-full'>
-                <label className="block mt-2">
-                    <span className="text-gray-700">Admin</span>
-                    <input type="text" className="block w-full mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0" defaultValue={selectedCompany?.admin_name} />
-                </label>
-                <label className="block mt-2">
-                    <span className="text-gray-700">Location</span>
-                    <input type="text" className="block w-full mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0" defaultValue={selectedCompany?.location} />
-                </label>
-                <button className="px-4 py-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-400">Update</button>
-            </form>
+            <form className='w-full' onSubmit={(e) => {
+            e.preventDefault();
+            handleSetAdmin(adminEmail);
+        }}>
+            <label className="block mt-2">
+                <span className="text-gray-700">Admin</span>
+                <input 
+                    type="email" 
+                    name='' 
+                    className="block w-full mt-1 bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0" 
+                    placeholder='Admin Email' 
+                    onChange={(e) => setAdminEmail(e.target.value)} // Add this line
+                />
+            </label>
+            <button type='submit' className="px-4 py-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-400">Update</button>
+        </form>
         </div>
         ) : (
             <>
@@ -159,6 +198,8 @@ export const CompanyTable = () => {
         </div>
 </div>
     </Modal>
+
+    <ToastContainer />
 </div>
 
     )

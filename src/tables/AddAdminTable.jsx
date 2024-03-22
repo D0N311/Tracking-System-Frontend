@@ -38,6 +38,7 @@ export const AddAdminTable = () => {
             closeModal();
             toast.success(response.data.message, {
                 position: "top-center",
+                marginTop: "50px",
                 autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -50,11 +51,11 @@ export const AddAdminTable = () => {
         } catch (error) {
             console.error('Failed to activate admin:', error);
         }
-        setIsOpen(false);
+        closeModal( );
     }
 
     const closeModal = () => {
-        setIsOpen(false);
+        setShowAddAdminModal(false);
     }
 
     return(
@@ -71,7 +72,7 @@ export const AddAdminTable = () => {
         >
         <div className="relative p-10 overflow-x-auto bg-gray-300 shadow-md sm:rounded-lg">
         <div className="flex items-center justify-between mb-3">
-            <h1 className="py-2 text-2xl font-bold text-gray-800 dark:text-gray-50">Add Admin</h1>
+            <h1 className="py-2 text-2xl font-bold text-gray-800 dark:text-gray-50">Activate Admin</h1>
             <div className="flex justify-end space-x-2">
                 <button onClick={fetchAdmins} className="px-4 py-2 font-bold text-white bg-blue-500 border-blue-700 rounded-3xl hover:bg-blue-700">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">

@@ -9,3 +9,7 @@ export * from './DeactivateAdminAPI.jsx';
 export * from './AdminIndex.jsx';
 export * from './ActivateAdminAPI.jsx';
 export * from './NoRoleIndexAPI.jsx';
+export * from './ActiveUsersAPI.jsx';
+export * from './DeactivateUserAPI.jsx';
+export * from './ActivateUsersAPI.jsx';
+export * from './SetAdminAPI.jsx';

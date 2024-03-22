@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { adminIndex, deactivateAdmin, ActivateAdminAPI } from '../api';
 import { ToastContainer, toast } from 'react-toastify';
+import { AddAdminTable } from '../tables';
 
 export const AdminTable = () => {
     const [admins, setAdmins] = useState([]);
@@ -31,7 +31,7 @@ export const AdminTable = () => {
             const response = await deactivateAdmin(admin_id);
             toast.error(response.data.message, {
                 position: "top-center",
-                autoClose: 3000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -43,6 +43,7 @@ export const AdminTable = () => {
         } catch (error) {
             console.error('Failed to deactivate admin:', error);
         }
+        fetchAdmins();
     }
       
     const handlePageChange = (newPage) => {
@@ -65,7 +66,7 @@ export const AdminTable = () => {
             closeModal();
             toast.success(response.data.message, {
                 position: "top-center",
-                autoClose: 3000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -73,10 +74,11 @@ export const AdminTable = () => {
                 progress: undefined,
                 theme: "dark",
             });
-           
+            
         } catch (error) {
             console.error('Failed to activate admin:', error);
         }
+        fetchAdmins();
         setIsOpen(false);
     }
 
@@ -89,12 +91,15 @@ export const AdminTable = () => {
 
 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
 <div className="flex items-center justify-between mb-3">
-    <h1 className="py-2 text-2xl font-bold text-gray-800 dark:text-gray-50">Admins</h1>
-    <button onClick={fetchAdmins} className="px-4 py-2 font-bold text-white bg-blue-500 border-blue-700 rounded-3xl hover:bg-blue-700">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-        </svg>
-    </button>
+    <div className="flex items-center mb-5">
+        <h1 className="py-2 text-2xl font-bold text-gray-800 dark:text-gray-50">Current Admins</h1>
+        <button onClick={fetchAdmins} className="px-4 py-2 ml-2 font-bold text-white bg-blue-500 border-blue-700 rounded-3xl hover:bg-blue-700">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+        </button>
+    </div>
+    <AddAdminTable />
 </div>
     <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -120,7 +125,15 @@ export const AdminTable = () => {
         {admins.map((admin, index) => (
             <tr key={index} className="border-b odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
                 <th className="px-6 py-4">
-                    {admin.name}
+                    <div className='flex'>
+                    {admin.activated_at ? 
+                        <span style={{color: 'green'}}>●</span> : 
+                        <span style={{color: 'grey'}}>●</span>
+                    }
+                    <div className='ml-3 '>
+                        {admin.name}
+                    </div>
+                    </div>
                 </th>
                 <td className="px-6 py-4">
                     {admin.email}
@@ -134,7 +147,7 @@ export const AdminTable = () => {
                 
                 <td className="px-6 py-4">
                 {admin.activated_at ? 
-                <button onClick={() => handleDeactivateClick(admin)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Deactivate</button> 
+                <button onClick={() => handleDeactivateClick(admin)} className="font-medium text-red-600 dark:text-red-500 hover:underline">Deactivate</button> 
                 : 
                 <button onClick={() => handleActivateClick(admin)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Activate</button>
                 }
@@ -146,7 +159,7 @@ export const AdminTable = () => {
 
     
 {/* pagination */}
-<nav aria-label="" className='flex justify-center mt-3'>
+<nav aria-label="" className='flex justify-end mt-3'>
   <ul className="inline-flex -space-x-px text-sm">
     <li>
       <a onClick={() => handlePageChange(currentPage - 1)} className="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 cursor-pointer ms-0 border-e-0 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import React, { useState, useEffect, useContext } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+import { UserContext } from '../services/UserContext';
 import 'react-toastify/dist/ReactToastify.css';
 
 import SuperAdminSidebar from '../pages/SuperAdmin/SuperAdminSidebar';
@@ -10,6 +10,13 @@ import WelcomeBanner from '../partials/dashboard/WelcomeBanner';
 export const SADashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
+  const context = useContext(UserContext);
+
+  if (!context || context.state.role !== 'SuperAdmin') {
+    localStorage.clear();
+    Navigate('/Login');
+    return null;
+  }
 
   useEffect(() => {
         const timer = setTimeout(() => {
@@ -45,8 +52,7 @@ export const SADashboard = () => {
               </div>
           </div>
         </main>
-      </div>
-      <ToastContainer />
+      </div>  
     </div>
   );
 }

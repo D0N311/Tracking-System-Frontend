@@ -12,7 +12,7 @@ export const PrivateRoutes = () => {
     const routes = [
         {
             name: "SADashboard",
-            path: "dashboard/superadmin",
+            path: "dashboard/super-admin",
             element: <SADashboard />,
             children: [
                 {
@@ -61,6 +61,3 @@ export const PrivateRoutes = () => {
         ) : <Navigate to="/Login"/>
     )
 }
-
-
-

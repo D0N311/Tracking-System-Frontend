@@ -24,8 +24,8 @@ function App() {
             </Route>
            
             <Route element={<PrivateRoutes />}>
-                <Route element={<Dashboard/>} path="/dashboard"/>
-                <Route element={<SADashboard/>} path="/dashboard/superadmin/*"/>
+                {/* <Route element={<Dashboard/>} path="/dashboard"/> */}
+                <Route element={<SADashboard/>} path="/dashboard/super-admin/*"/>
                 <Route element={<ADashboard/>} path="/dashboard/admin/*"/>
                 <Route element={<Company/>} path="/company"/>
                 <Route element={<CompanyProfile/>} path="/crofile"/>

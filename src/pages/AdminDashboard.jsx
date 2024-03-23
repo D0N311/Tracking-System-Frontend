@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import  AdminSidebar from '../pages/Admin/AdminSidebar.jsx';
 import Header from '../partials/Header';
 import WelcomeBanner from '../partials/dashboard/WelcomeBanner';
+import { UserContext } from '../services/UserContext';
 
 export const ADashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
+  const context = useContext(UserContext);
+
+  if (context.state.role !== 'Admin' || !context) {
+    localStorage.clear();
+    Navigate('/Login');
+    return null;
+  }
 
   useEffect(() => {
         const timer = setTimeout(() => {

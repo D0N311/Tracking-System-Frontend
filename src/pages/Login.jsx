@@ -2,21 +2,38 @@ import Logo from '../assets/logo.svg';
 import Eye from '../assets/eye.svg';
 import Email from '../assets/email.svg';
 import ThemeToggle from '../components/ThemeToggle';
-import { loginUser } from '../api';
-
+import { loginUser, checkUser } from '../api';
+import { UserContext } from '../services/UserContext';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 export const Login = () =>  {
-
+  
+  const context = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const fetchUser = async () => {
+    try {
+      const user = await checkUser();
+      context.setState({
+        name: user.data.name,
+        verified: user.data.verified,
+        role: user.data.role,
+        company_id: user.data.company_id
+      });
+      
+    } catch (error) {
+      localStorage.clear();
+      navigate('/Login');
+    }
+
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -33,26 +50,30 @@ export const Login = () =>  {
       .required('Password is required'),
     }),
     onSubmit: async (values) => {
-      try {
+    try {
         localStorage.clear();
         setLoading(true);
-        const response = await loginUser(values.email, values.password);
-        const success = response.data.success;
         
+        const response = await loginUser(values.email, values.password);        
         // Save token to local storage
         localStorage.setItem('token', response.data.data.token);
+        
+        fetchUser();
 
-        // Check if user is authenticated before navigating
-        setLoading(false);
-        if (success) {
-           navigate('/Dashboard');
+        if (context.state.role === 'SuperAdmin') {
+          navigate('/dashboard/super-admin');
         }
+        if (context.state.role === 'Admin') {
+          navigate('/dashboard/admin');
+        }
+
+      setLoading(false);   
           
       }catch (error) {
         setLoading(false);
         toast.error(error.response.data.data.error, {
           position: "top-center",
-          autoClose: 3000,
+          autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -65,10 +86,6 @@ export const Login = () =>  {
     },
   });
 
-  // //check user
-  // useEffect(() => {
-  // console.log(object);
-  // }, []);
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
@@ -121,11 +138,11 @@ export const Login = () =>  {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Password" />
                 
                 </div>
-                <div className="flex items-center justify-between  mb-6">
+                <div className="flex items-center justify-between mb-6">
                     <div className="flex items-start">
                     <div className="flex items-center h-5">
                       <input id="remember" aria-describedby="remember" type="checkbox" onChange={togglePassword}
-                      className="w-4 h-4 border cursor-pointer border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
+                      className="w-4 h-4 border border-gray-300 rounded cursor-pointer bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
                     </div>
                     <div className="ml-1 text-sm">
                       <label for="remember" className="text-white cursor-pointer dark:text-gray-300">Show Password</label>

@@ -33,7 +33,10 @@ function DropdownProfile({
         navigate('/Login');
       }
       if (context.state.role === 'SuperAdmin') {
-        navigate('/Dashboard/SuperAdmin');
+        navigate('/dashboard/super-admin');
+      }
+      if (context.state.role === 'Admin') {
+        navigate('/dashboard/admin');
       }
     };
   

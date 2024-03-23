@@ -134,14 +134,14 @@ export const SuperAdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </SidebarLinkGroup>
        
               {/* Company */}
-              <SidebarLinkGroup activecondition={pathname.includes('/Dashboard/SuperAdmin/Company')}>
+              <SidebarLinkGroup activecondition={pathname.includes('/dashboard/super-admin/company')}>
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
                       <Link
-                        to={'/Dashboard/SuperAdmin/Company'}
+                        to={'/dashboard/super-admin/company'}
                         className={`block text-slate-200 truncate transition duration-150 ${
-                            pathname.includes('/Dashboard/SuperAdmin/Company') ? 'hover:text-slate-200' : 'hover:text-white'
+                            pathname.includes('/dashboard/super-admin/company') ? 'hover:text-slate-200' : 'hover:text-white'
                         }`}
                         onClick={(e) => {
                             sidebarExpanded ? handleClick() : setSidebarExpanded(true);
@@ -151,15 +151,15 @@ export const SuperAdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           <div className="flex items-center">
                             <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24">
                               <path
-                                className={`fill-current ${pathname.includes('/Dashboard/SuperAdmin/Company') ? 'text-indigo-300' : 'text-slate-400'}`}
+                                className={`fill-current ${pathname.includes('/dashboard/super-admin/company') ? 'text-indigo-300' : 'text-slate-400'}`}
                                 d="M13 15l11-7L11.504.136a1 1 0 00-1.019.007L0 7l13 8z"
                               />
                               <path
-                                className={`fill-current ${pathname.includes('/Dashboard/SuperAdmin/Company') ? 'text-indigo-600' : 'text-slate-700'}`}
+                                className={`fill-current ${pathname.includes('/dashboard/super-admin/company') ? 'text-indigo-600' : 'text-slate-700'}`}
                                 d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z"
                               />
                               <path
-                                className={`fill-current ${pathname.includes('/Dashboard/SuperAdmin/Company') ? 'text-indigo-500' : 'text-slate-600'}`}
+                                className={`fill-current ${pathname.includes('/dashboard/super-admin/company') ? 'text-indigo-500' : 'text-slate-600'}`}
                                 d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z"
                               />
                             </svg>
@@ -174,14 +174,14 @@ export const SuperAdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 }}
               </SidebarLinkGroup>
               {/* Admin */}
-              <SidebarLinkGroup activecondition={pathname.includes('/Dashboard/Superadmin/Admin')}>
+              <SidebarLinkGroup activecondition={pathname.includes('/dashboard/super-admin/admin')}>
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
                        <Link
-                        to={'/Dashboard/Superadmin/Admin'}
+                        to={'/dashboard/super-admin/admin'}
                         className={`block text-slate-200 truncate transition duration-150 ${
-                            pathname.includes('/Dashboard/Superadmin/Admin') ? 'hover:text-slate-200' : 'hover:text-white'
+                            pathname.includes('/dashboard/super-admin/admin') ? 'hover:text-slate-200' : 'hover:text-white'
                         }`}
                         onClick={(e) => {
                             sidebarExpanded ? handleClick() : setSidebarExpanded(true);
@@ -191,11 +191,11 @@ export const SuperAdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           <div className="flex items-center">
                             <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24">
                               <path
-                                className={`fill-current ${pathname.includes('/Dashboard/Superadmin/Admin') ? 'text-indigo-500' : 'text-slate-600'}`}
+                                className={`fill-current ${pathname.includes('/dashboard/super-admin/admin') ? 'text-indigo-500' : 'text-slate-600'}`}
                                 d="M18.974 8H22a2 2 0 012 2v6h-2v5a1 1 0 01-1 1h-2a1 1 0 01-1-1v-5h-2v-6a2 2 0 012-2h.974zM20 7a2 2 0 11-.001-3.999A2 2 0 0120 7zM2.974 8H6a2 2 0 012 2v6H6v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5H0v-6a2 2 0 012-2h.974zM4 7a2 2 0 11-.001-3.999A2 2 0 014 7z"
                               />
                               <path
-                                className={`fill-current ${pathname.includes('/Dashboard/Superadmin/Admin') ? 'text-indigo-300' : 'text-slate-400'}`}
+                                className={`fill-current ${pathname.includes('/dashboard/super-admin/admin') ? 'text-indigo-300' : 'text-slate-400'}`}
                                 d="M12 6a3 3 0 110-6 3 3 0 010 6zm2 18h-4a1 1 0 01-1-1v-6H6v-6a3 3 0 013-3h6a3 3 0 013 3v6h-3v6a1 1 0 01-1 1z"
                               />
                             </svg>

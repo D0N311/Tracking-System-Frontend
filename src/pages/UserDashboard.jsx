@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Outlet } from "react-router-dom";
-import AdminSidebar from "../pages/Admin/AdminSidebar.jsx";
+import { UserSidebar } from "../pages/User";
 import Header from "../partials/Header";
 import WelcomeBanner from "../partials/dashboard/WelcomeBanner";
 import { Navigate } from "react-router-dom";
 
-export const ADashboard = () => {
+export const UDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
 
@@ -13,7 +13,7 @@ export const ADashboard = () => {
   const role = localStorage.getItem("role");
 
   useEffect(() => {
-    if (!token || role !== "Admin") {
+    if (!token || role !== "User") {
       localStorage.clear();
       Navigate("/Login");
     }
@@ -26,10 +26,11 @@ export const ADashboard = () => {
 
     return () => clearTimeout(timer); // This will clear the timer when the component unmounts
   }, []);
+
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
-      <AdminSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <UserSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       {/* Content area */}
       <div className="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">

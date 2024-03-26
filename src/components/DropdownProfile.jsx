@@ -1,16 +1,13 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import Transition from '../utils/Transition';
-import { logoutUser } from '../api';
-import UserAvatar from '../images/user-avatar-32.png';
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../services/UserContext';
-import { checkUser } from '../api';
+import React, { useState, useRef, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import Transition from "../utils/Transition";
+import { logoutUser } from "../api";
+import UserAvatar from "../images/user-avatar-32.png";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../services/UserContext";
+import { checkUser } from "../api";
 
-function DropdownProfile({
-  align
-}) {
-
+function DropdownProfile({ align }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const context = useContext(UserContext);
@@ -18,41 +15,39 @@ function DropdownProfile({
   const trigger = useRef(null);
   const dropdown = useRef(null);
 
-
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const user = await checkUser();
-        context.setState({name: user.data.name,
-                          verified: user.data.verified,
-                          role: user.data.role,
-                          company_id: user.data.company_id
-                        });   
+        context.setState({
+          name: user.data.name,
+          verified: user.data.verified,
+          role: user.data.role,
+          company_id: user.data.company_id,
+        });
       } catch (error) {
         localStorage.clear();
-        navigate('/Login');
-      }
-      if (context.state.role === 'SuperAdmin') {
-        navigate('/dashboard/super-admin');
-      }
-      if (context.state.role === 'Admin') {
-        navigate('/dashboard/admin');
+        navigate("/Login");
       }
     };
-  
+
     fetchUser();
   }, []);
-
 
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return;
-      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
+      if (
+        !dropdownOpen ||
+        dropdown.current.contains(target) ||
+        trigger.current.contains(target)
+      )
+        return;
       setDropdownOpen(false);
     };
-    document.addEventListener('click', clickHandler);
-    return () => document.removeEventListener('click', clickHandler);
+    document.addEventListener("click", clickHandler);
+    return () => document.removeEventListener("click", clickHandler);
   });
 
   // close if the esc key is pressed
@@ -61,15 +56,13 @@ function DropdownProfile({
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
     };
-    document.addEventListener('keydown', keyHandler);
-    return () => document.removeEventListener('keydown', keyHandler);
+    document.addEventListener("keydown", keyHandler);
+    return () => document.removeEventListener("keydown", keyHandler);
   });
 
   const handleLogout = async () => {
     await logoutUser(navigate);
   };
- 
-   
 
   return (
     <div className="relative inline-flex">
@@ -80,17 +73,30 @@ function DropdownProfile({
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
       >
-        <img className="w-8 h-8 rounded-full" src={UserAvatar} width="32" height="32" alt="User" />
+        <img
+          className="w-8 h-8 rounded-full"
+          src={UserAvatar}
+          width="32"
+          height="32"
+          alt="User"
+        />
         <div className="flex items-center truncate">
-          <span className="ml-2 text-sm font-medium truncate dark:text-slate-300 group-hover:text-slate-800 dark:group-hover:text-slate-200">{context.state.name}</span>
-          <svg className="w-3 h-3 ml-1 fill-current shrink-0 text-slate-400" viewBox="0 0 12 12">
+          <span className="ml-2 text-sm font-medium truncate dark:text-slate-300 group-hover:text-slate-800 dark:group-hover:text-slate-200">
+            {context.state.name}
+          </span>
+          <svg
+            className="w-3 h-3 ml-1 fill-current shrink-0 text-slate-400"
+            viewBox="0 0 12 12"
+          >
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
           </svg>
         </div>
       </button>
 
       <Transition
-        className={`origin-top-right z-10 absolute top-full min-w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 py-1.5 rounded shadow-lg overflow-hidden mt-1 ${align === 'right' ? 'right-0' : 'left-0'}`}
+        className={`origin-top-right z-10 absolute top-full min-w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 py-1.5 rounded shadow-lg overflow-hidden mt-1 ${
+          align === "right" ? "right-0" : "left-0"
+        }`}
         show={dropdownOpen}
         enter="transition ease-out duration-200 transform"
         enterStart="opacity-0 -translate-y-2"
@@ -105,9 +111,15 @@ function DropdownProfile({
           onBlur={() => setDropdownOpen(false)}
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200 dark:border-slate-700">
-            <div className="font-medium text-slate-800 dark:text-slate-100">{context.state.name}</div>
-            <div className="text-xs italic text-slate-500 dark:text-slate-400">Company ID: {context.state.company_id}</div>
-            <div className="text-xs italic text-slate-500 dark:text-slate-400">Role: {context.state.role}</div>
+            <div className="font-medium text-slate-800 dark:text-slate-100">
+              {context.state.name}
+            </div>
+            <div className="text-xs italic text-slate-500 dark:text-slate-400">
+              Company ID: {context.state.company_id}
+            </div>
+            <div className="text-xs italic text-slate-500 dark:text-slate-400">
+              Role: {context.state.role}
+            </div>
           </div>
           <ul>
             <li>
@@ -134,7 +146,7 @@ function DropdownProfile({
         </div>
       </Transition>
     </div>
-  )
+  );
 }
 
 export default DropdownProfile;

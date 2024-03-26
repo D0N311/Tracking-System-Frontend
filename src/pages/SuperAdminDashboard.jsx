@@ -1,34 +1,37 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { UserContext } from '../services/UserContext';
-import 'react-toastify/dist/ReactToastify.css';
-
-import SuperAdminSidebar from '../pages/SuperAdmin/SuperAdminSidebar';
-import Header from '../partials/Header';
-import WelcomeBanner from '../partials/dashboard/WelcomeBanner';
+import React, { useState, useEffect } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import SuperAdminSidebar from "../pages/SuperAdmin/SuperAdminSidebar";
+import Header from "../partials/Header";
+import WelcomeBanner from "../partials/dashboard/WelcomeBanner";
 
 export const SADashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
-  const context = useContext(UserContext);
-
-  if (!context || context.state.role !== 'SuperAdmin') {
-    localStorage.clear();
-    Navigate('/Login');
-    return null;
-  }
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowBanner(false);
-        }, 5000);
+    if (!token || role !== "SuperAdmin") {
+      localStorage.clear();
+      Navigate("/Login");
+    }
+  }, [role, token]);
 
-        return () => clearTimeout(timer); // This will clear the timer when the component unmounts
-    }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowBanner(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
-      <SuperAdminSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <SuperAdminSidebar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
 
       {/* Content area */}
       <div className="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
@@ -45,14 +48,14 @@ export const SADashboard = () => {
               {/* Left: Avatars */}
               {/* <DashboardAvatars /> */}
             </div>
-              {/* Render child routes */}
+            {/* Render child routes */}
 
-            <div className='w-full'>
+            <div className="w-full">
               <Outlet />
-              </div>
+            </div>
           </div>
         </main>
-      </div>  
+      </div>
     </div>
   );
-}
+};

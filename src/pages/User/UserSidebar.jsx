@@ -4,7 +4,7 @@ import { NavLink, useLocation, Link } from "react-router-dom";
 import SidebarLinkGroup from "../../partials/SidebarLinkGroup";
 import Logo from "../../assets/logo.svg";
 
-export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
+export const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
   const { pathname } = location;
 
@@ -154,7 +154,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                               />
                             </svg>
                             <span className="ml-3 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                              dashboard
+                              Dashboard
                             </span>
                           </div>
                         </div>
@@ -164,17 +164,17 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 }}
               </SidebarLinkGroup>
 
-              {/* Company */}
+              {/* Items */}
               <SidebarLinkGroup
-                activecondition={pathname.includes("/dashboard/admin/company")}
+                activecondition={pathname.includes("/dashboard/user/add-item")}
               >
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
                       <Link
-                        to={"/dashboard/admin/company"}
+                        to={"/dashboard/user/add-item"}
                         className={`block text-slate-200 truncate transition duration-150 ${
-                          pathname.includes("/dashboard/admin/company")
+                          pathname.includes("/dashboard/user/add-item")
                             ? "hover:text-slate-200"
                             : "hover:text-white"
                         }`}
@@ -192,7 +192,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             >
                               <path
                                 className={`fill-current ${
-                                  pathname.includes("/dashboard/admin/company")
+                                  pathname.includes("/dashboard/user/add-item")
                                     ? "text-indigo-300"
                                     : "text-slate-400"
                                 }`}
@@ -200,7 +200,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                               />
                               <path
                                 className={`fill-current ${
-                                  pathname.includes("/dashboard/admin/company")
+                                  pathname.includes("/dashboard/user/add-item")
                                     ? "text-indigo-600"
                                     : "text-slate-700"
                                 }`}
@@ -208,7 +208,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                               />
                               <path
                                 className={`fill-current ${
-                                  pathname.includes("/dashboard/admin/company")
+                                  pathname.includes("/dashboard/user/add-item")
                                     ? "text-indigo-500"
                                     : "text-slate-600"
                                 }`}
@@ -216,7 +216,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                               />
                             </svg>
                             <span className="ml-3 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                              Company
+                              Items
                             </span>
                           </div>
                         </div>
@@ -225,7 +225,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   );
                 }}
               </SidebarLinkGroup>
-              {/* Admin */}
+              {/* Pass Items */}
               <SidebarLinkGroup
                 activecondition={pathname.includes("/dashboard/admin/users")}
               >
@@ -269,7 +269,7 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                               />
                             </svg>
                             <span className="ml-3 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                              Users
+                              Transfer Item
                             </span>
                           </div>
                         </div>
@@ -386,101 +386,6 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </SidebarLinkGroup>
             </ul>
           </div>
-          {/* More group */}
-          <div>
-            <h3 className="pl-3 text-xs font-semibold uppercase text-slate-500">
-              <span
-                className="hidden w-6 text-center lg:block lg:sidebar-expanded:hidden 2xl:hidden"
-                aria-hidden="true"
-              >
-                •••
-              </span>
-              <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                More
-              </span>
-            </h3>
-            <ul className="mt-3">
-              {/* Accounts */}
-              <SidebarLinkGroup>
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <a
-                        href="#0"
-                        className={`block text-slate-200 truncate transition duration-150 ${
-                          open ? "hover:text-slate-200" : "hover:text-white"
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded
-                            ? handleClick()
-                            : setSidebarExpanded(true);
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <svg
-                              className="w-6 h-6 shrink-0"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                className="fill-current text-slate-600"
-                                d="M8.07 16H10V8H8.07a8 8 0 110 8z"
-                              />
-                              <path
-                                className="fill-current text-slate-400"
-                                d="M15 12L8 6v5H0v2h8v5z"
-                              />
-                            </svg>
-                            <span className="ml-3 text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                              Accounts
-                            </span>
-                          </div>
-                          {/* Icon */}
-                          <div className="flex ml-2 shrink-0">
-                            <svg
-                              className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${
-                                open && "rotate-180"
-                              }`}
-                              viewBox="0 0 12 12"
-                            >
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
-                        <ul className={`pl-9 mt-1 ${!open && "hidden"}`}>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink
-                              end
-                              to="/signin"
-                              className="block truncate transition duration-150 text-slate-400 hover:text-slate-200"
-                            >
-                              <span className="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                                Reset Password
-                              </span>
-                            </NavLink>
-                          </li>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink
-                              end
-                              to="/signup"
-                              className="block truncate transition duration-150 text-slate-400 hover:text-slate-200"
-                            >
-                              <span className="text-sm font-medium duration-200 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">
-                                Deactivate Account
-                              </span>
-                            </NavLink>
-                          </li>
-                        </ul>
-                      </div>
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
-            </ul>
-          </div>
         </div>
 
         {/* Expand / collapse button */}
@@ -506,4 +411,4 @@ export const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   );
 };
 
-export default AdminSidebar;
+export default UserSidebar;
